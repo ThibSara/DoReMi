@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import StackNavigator from './components/navigation/StackNavigator'; 
+import { NavigationContainer } from '@react-navigation/native';
+import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
+import { ThemeProvider } from 'styled-components/native';
+import theme from './components/style/theme'; 
+import globalStyles from './components/style/globalStyles'; // Import globalStyles
+import ThemeContext from './components/style/ThemeContext';
+import { View } from 'react-native';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <ThemeContext.Provider value={{ theme, globalStyles }}>
+        <GluestackUIProvider>
+          <StackNavigator />
+        </GluestackUIProvider>
+      </ThemeContext.Provider>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
